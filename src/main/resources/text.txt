@@ -1,0 +1,25 @@
+var $employees = $('#employee-table');
+    $(function () {
+
+        $.ajax(
+            {
+
+                type: 'GET',
+                url: '/api/users',
+                success: function (employees) {
+                    // console.log('success',data)
+                    //array1.forEach(element => console.log(element));
+                    employees.forEach(employee => $employees.append('<tr>' + '<td>' + employee.name + '</td>' + '<td>' + employee.surname + '</td>' + '<td>' + employee.fatherName + '</td>' +
+                        '<td>' + employee.birthday + '</td>' + '<td>' + employee.position + '</td>' + '<td>' + employee.finCode + '</td>' + '</tr>'))
+                    /*$.each(employees, function (i, employee) {
+                        $employees.append('<li> name : ' + employee.name + ', surname : ' + employee.surname + ' ,' + 'fatherName: ' + employee.fatherName + ',' +
+                            'birthday:' + employee.birthday + ', position : ' + employee.position + ', fincode : ' + employee.finCode + '</li>')
+                    });*/
+                },
+                error: function () {
+                    var $errorMessage = $('#error-name');
+                    $errorMessage.show();
+                }
+            }
+        )
+    });
